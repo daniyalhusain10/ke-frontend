@@ -1,0 +1,14 @@
+@import "tailwindcss";
+body{
+  font-family: "Montserrat", sans-serif;
+}
+.bold{
+  font-family: "Krona One", sans-serif;
+}
+
+
+.hide-scrollbar-chrome {
+    &::-webkit-scrollbar {
+        display: none; 
+    }
+}
