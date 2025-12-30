@@ -9,9 +9,10 @@ import React, {
 import axios from 'axios';
 
 const ShopContext = createContext(null);
+const VITE_BACKEND_URI="https://ke-frontend.vercel.app"
 
 export const ShopProvider = ({ children }) => {
-  const API_BASE_URL = `${import.meta.env.VITE_BACKEND_URI}/api/get-jobs`;
+  const API_BASE_URL = `${VITE_BACKEND_URI}/api/get-jobs`;
 
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
