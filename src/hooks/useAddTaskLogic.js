@@ -3,7 +3,7 @@ import axios from "axios";
 import { useShop } from "../context/ShopContext";
 
 const DEFAULT_ATHER_HUSAIN = "Ather Husain";
-const VITE_BACKEND_URI="https://ke-frontend.vercel.app"
+const VITE_BACKEND_URI="https://ke-backend.vercel.app"
 const API_BASE_URL = `${VITE_BACKEND_URI}/api/admin-task`;
 
 const initialFormData = {
