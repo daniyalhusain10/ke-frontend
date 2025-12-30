@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
   const navigate = useNavigate();
-  const VITE_BACKEND_URI="https://ke-frontend.vercel.app"
+  const VITE_BACKEND_URI="https://ke-backend.vercel.app"
   const login = async (data) => {
     try {
       const response = await fetch(`${VITE_BACKEND_URI}/api/login`, {
