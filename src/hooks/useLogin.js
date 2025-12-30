@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
   const navigate = useNavigate();
-
+  const VITE_BACKEND_URI="https://ke-frontend.vercel.app"
   const login = async (data) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/login`, {
+      const response = await fetch(`${VITE_BACKEND_URI}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data), // { email, password }
