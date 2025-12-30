@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useShop } from '../context/ShopContext'; 
 import { toast} from 'react-toastify'
 
-const API_BASE_URL = `${import.meta.env.VITE_BACKEND_URI}/api`;
+const VITE_BACKEND_URI="https://ke-frontend.vercel.app"
+const API_BASE_URL = `${VITE_BACKEND_URI}/api`;
 
 export const useEditDeleteTask = () => {
     const { jobs, fetchJobs } = useShop(); 
