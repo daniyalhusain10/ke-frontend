@@ -9,7 +9,7 @@ import React, {
 import axios from 'axios';
 
 const ShopContext = createContext(null);
-const VITE_BACKEND_URI="https://ke-frontend.vercel.app"
+const VITE_BACKEND_URI="https://ke-backend.vercel.app"
 
 export const ShopProvider = ({ children }) => {
   const API_BASE_URL = `${VITE_BACKEND_URI}/api/get-jobs`;
