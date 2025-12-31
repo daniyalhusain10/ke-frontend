@@ -145,7 +145,7 @@ const AllJobsUser = () => {
                       {job.atherHusain?.charAt(0) || 'A'}
                     </div>
                     <div>
-                        <p className="text-[9px] text-gray-400 font-bold uppercase tracking-tighter leading-none">Supervisor</p>
+                        <p className="text-[9px] text-gray-400 font-bold uppercase tracking-tighter leading-none">AE</p>
                         <span className="text-xs font-black text-gray-900 uppercase tracking-tight">{job.atherHusain || 'Ather Husain'}</span>
                     </div>
                   </div>
