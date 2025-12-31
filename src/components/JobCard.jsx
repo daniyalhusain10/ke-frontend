@@ -1,9 +1,9 @@
 import React from 'react';
-import { FiEdit2, FiTrash2 } from 'react-icons/fi';
+import { FiEdit2, FiTrash2, FiSun, FiMoon } from 'react-icons/fi'; // Naye icons add kiye
 import { FaClock } from "react-icons/fa";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlinePlace } from "react-icons/md";
-import { FiTruck, FiTag } from "react-icons/fi"; // FiTag icon add kiya
+import { FiTruck, FiTag } from "react-icons/fi";
 import { CiUser } from "react-icons/ci";
 
 // Helper functions
@@ -34,6 +34,18 @@ const JobCard = ({ jobData, editTask, deleteTask }) => {
                         <FiTag size={10} />
                         {jobData.workCategory || 'General'}
                     </span>
+
+                    {/* 🟠 Shift Display (New) */}
+                    {jobData.shift && (
+                        <span className={`flex items-center gap-1 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm border ${
+                            jobData.shift.toLowerCase() === 'night' 
+                            ? 'bg-slate-800 text-white border-slate-900' 
+                            : 'bg-orange-100 text-orange-600 border-orange-200'
+                        }`}>
+                            {jobData.shift.toLowerCase() === 'night' ? <FiMoon size={10} /> : <FiSun size={10} />}
+                            {jobData.shift}
+                        </span>
+                    )}
                 </div>
                 
                 <span className="text-sm opacity-90 font-medium whitespace-nowrap bg-white px-3 py-1 rounded-full shadow-sm text-gray-600 border border-gray-200">
