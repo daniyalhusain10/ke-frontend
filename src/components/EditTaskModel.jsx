@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { FiX, FiCheckCircle, FiClock, FiTag } from 'react-icons/fi';
+import { FiX, FiCheckCircle, FiClock, FiTag, FiCalendar, FiSun, FiMoon } from 'react-icons/fi';
 
 const EditTaskModal = ({ isOpen, onClose, taskData, onSave }) => {
     const [formData, setFormData] = useState({
+        jobCreatedDate: '',
+        shift: '', // Default shift
         inputField1: '', inputField2: '', inputField3: '',
         inputField4: '', inputField5: '', inputField6: '',
         inputField7: '', status: 'pending', workCategory: '' 
@@ -13,6 +15,8 @@ const EditTaskModal = ({ isOpen, onClose, taskData, onSave }) => {
     useEffect(() => {
         if (taskData && isOpen) {
             setFormData({
+                jobCreatedDate: taskData.jobCreatedDate ? taskData.jobCreatedDate.split('T')[0] : '',
+                shift: taskData.shift || '', 
                 inputField1: taskData.inputField1 || '',
                 inputField2: taskData.inputField2 || '',
                 inputField3: taskData.inputField3 || '',
@@ -37,14 +41,12 @@ const EditTaskModal = ({ isOpen, onClose, taskData, onSave }) => {
         { name: 'inputField2', label: 'AOC' },
         { name: 'inputField3', label: 'Workscope' },
         { name: 'inputField4', label: 'Vehicle' },
-        { name: 'inputField5', label: 'Remarks' },
         { name: 'inputField6', label: 'Fitter' },
         { name: 'inputField7', label: 'K.K. Name' },
     ];
 
     return (
         <div className="fixed inset-0 z-[100] flex justify-end items-start p-4 pointer-events-none bg-black/40 backdrop-blur-sm">
-            
             <div className="bg-white w-full max-w-md shadow-2xl rounded-3xl border border-gray-100 pointer-events-auto flex flex-col max-h-[95vh] overflow-hidden translate-x-0 transition-all">
                 
                 {/* Header */}
@@ -61,16 +63,57 @@ const EditTaskModal = ({ isOpen, onClose, taskData, onSave }) => {
                 {/* Body */}
                 <div className="p-6 space-y-6 overflow-y-auto bg-white">
                     
-                    {/* ✅ WORK CATEGORY SECTION (High Visibility) */}
+                    {/* JOB CREATED DATE */}
+                    <div className="space-y-2">
+                        <label className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">
+                            <FiCalendar className="text-blue-500" /> Job Created Date
+                        </label>
+                        <input
+                            type="date"
+                            name="jobCreatedDate"
+                            value={formData.jobCreatedDate}
+                            onChange={handleChange}
+                            className="w-full bg-blue-50/50 border-2 border-transparent rounded-xl px-4 py-3 text-sm font-bold text-blue-900 focus:bg-white focus:border-blue-500 outline-none transition-all"
+                        />
+                    </div>
+
+                    <hr className="border-gray-100" />
+
+                    {/* ✅ SHIFT TOGGLE (Day/Night) */}
+                    <div className="space-y-3">
+                        <label className="flex items-center gap-2 text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            Shift
+                        </label>
+                        <div className="flex p-1 bg-gray-100 rounded-2xl gap-1">
+                            <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, shift: 'Day' })}
+                                className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-black transition-all ${
+                                    formData.shift === 'Day' ? 'bg-white text-orange-500 shadow-sm border border-orange-100' : 'text-gray-400'
+                                }`}
+                            >
+                                <FiSun size={16} /> DAY
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, shift: 'Night' })}
+                                className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-black transition-all ${
+                                    formData.shift === 'Night' ? 'bg-slate-800 text-white shadow-lg' : 'text-gray-400'
+                                }`}
+                            >
+                                <FiMoon size={16} /> NIGHT
+                            </button>
+                        </div>
+                    </div>
+                    
+                    {/* WORK CATEGORY SECTION */}
                     <div className="space-y-3">
                         <label className="flex items-center gap-2 text-xs font-bold text-gray-500 uppercase tracking-wider">
                             <FiTag className="text-blue-600" /> Work Category
                         </label>
                         <div className="grid grid-cols-2 gap-2">
                             {categories.map((cat) => {
-                                // Comparison logic
                                 const isSelected = formData.workCategory?.trim().toUpperCase() === cat.toUpperCase();
-                                
                                 return (
                                     <button
                                         key={cat}
@@ -108,6 +151,21 @@ const EditTaskModal = ({ isOpen, onClose, taskData, onSave }) => {
                                 />
                             </div>
                         ))}
+
+                        {/* REMARKS */}
+                        <div className="relative group">
+                            <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1 ml-1">
+                                Remarks
+                            </label>
+                            <textarea
+                                name="inputField5"
+                                value={formData.inputField5}
+                                onChange={handleChange}
+                                rows="3"
+                                className="w-full bg-amber-50/50 border-2 border-transparent rounded-xl px-4 py-3 text-sm font-semibold text-gray-700 focus:bg-white focus:border-amber-400 outline-none transition-all whitespace-pre-wrap"
+                                placeholder="Enter Remarks (Shift+Enter for new line)..."
+                            />
+                        </div>
                     </div>
 
                     {/* Status Selection */}
