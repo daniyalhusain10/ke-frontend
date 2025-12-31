@@ -16,6 +16,7 @@ const initialFormData = {
   inputField6: "",
   inputField7: "",
   workCategory: "", // ✅ REQUIRED
+  shift:"",
   status: "pending",
   atherHusain: DEFAULT_ATHER_HUSAIN,
 };
