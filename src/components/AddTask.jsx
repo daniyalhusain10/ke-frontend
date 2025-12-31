@@ -1,5 +1,6 @@
 import React from 'react';
 import { IoClose } from "react-icons/io5";
+import { FiSun, FiMoon } from 'react-icons/fi'; // Icons for Shift
 import { useAddTaskLogic } from '../hooks/useAddTaskLogic';
 
 const TaskModal = ({ onClose }) => {
@@ -59,7 +60,7 @@ const TaskModal = ({ onClose }) => {
                             </div>
                         </div>
 
-                        {/* ✅ Work Category Selection (New Section) */}
+                        {/* ✅ Work Category Selection */}
                         <div className="pt-2">
                             <label className="block text-sm font-medium text-gray-700 mb-3 uppercase tracking-wider">Work Category:</label>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -67,7 +68,6 @@ const TaskModal = ({ onClose }) => {
                                     <button
                                         key={cat}
                                         type="button"
-                                        // Maan lete hain aap ise inputField1 ya kisi category field mein save kar rahe hain
                                         onClick={() => handleChange({ target: { name: 'workCategory', value: cat } })}
                                         className={`py-3 px-2 rounded-2xl text-[12px] font-black transition-all duration-200 border-2 ${
                                             formData.workCategory === cat 
@@ -78,6 +78,35 @@ const TaskModal = ({ onClose }) => {
                                         {cat}
                                     </button>
                                 ))}
+                            </div>
+                        </div>
+
+                        {/* ✅ Shift Selection (New Day/Night Toggle) */}
+                        <div className="pt-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-3 uppercase tracking-wider">Shift:</label>
+                            <div className="flex p-1 bg-gray-100 rounded-2xl gap-2 w-full max-w-sm">
+                                <button
+                                    type="button"
+                                    onClick={() => handleChange({ target: { name: 'shift', value: 'Day' } })}
+                                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-black transition-all ${
+                                        formData.shift === 'Day' 
+                                        ? 'bg-white text-orange-500 shadow-md border border-orange-100' 
+                                        : 'text-gray-400'
+                                    }`}
+                                >
+                                    <FiSun size={16} /> DAY
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => handleChange({ target: { name: 'shift', value: 'Night' } })}
+                                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-black transition-all ${
+                                        formData.shift === 'Night' 
+                                        ? 'bg-slate-800 text-white shadow-lg' 
+                                        : 'text-gray-400'
+                                    }`}
+                                >
+                                    <FiMoon size={16} /> NIGHT
+                                </button>
                             </div>
                         </div>
 
@@ -187,17 +216,18 @@ const TaskModal = ({ onClose }) => {
                                     className="mt-1 block w-full rounded-2xl border-gray-300 shadow-sm p-3 border focus:ring-green-500 focus:border-green-500"
                                 />
                             </div>
-                            <div className="sm:col-span-1">
-                                <label className="block text-sm font-medium text-gray-700">Remarks:</label>
-                                <input
-                                    type="text"
-                                    name="inputField5"
-                                    value={formData.inputField5}
-                                    onChange={handleChange}
-                                    placeholder="Notes"
-                                    className="mt-1 block w-full rounded-2xl border-gray-300 bg-amber-50 shadow-sm p-3 border focus:ring-green-500 focus:border-green-500"
-                                />
-                            </div>
+                           <div className="sm:col-span-1">
+                                    <label className="block text-sm font-medium text-gray-700">Remarks:</label>
+                                    <textarea
+                                        name="inputField5"
+                                        value={formData.inputField5}
+                                        onChange={handleChange}
+                                        placeholder="Notes (Shift+Enter for new line)"
+                                        rows="1" 
+                                        className="mt-1 block w-full rounded-2xl border-gray-300 bg-amber-50 shadow-sm p-3 border focus:ring-green-500 focus:border-green-500 whitespace-pre-wrap"
+                                        style={{ minHeight: '50px', resize: 'vertical' }}
+                                    />
+                                </div>
                         </div>
 
                         {message && (
